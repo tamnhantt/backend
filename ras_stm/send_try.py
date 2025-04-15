@@ -43,7 +43,6 @@ IN_AC_HV_3_DUTY_ID = 59
 IN_AC_HV_4_DUTY_ID = 60
 IN_AC_SCV_DUTY_ID = 47
 IN_AC_PUS_DUTY_ID = 45
-Remove-Item -Recurse -Force .git
 
 startid_sending = 165
 
@@ -53,14 +52,16 @@ b = int(input("pageid (0-255): "))
 c = int(input("typid (0-255): "))
 d = int(input("indexid (0-255): "))
 
+num_send = int(input("number of packets to send: "))
 
+bit_5_to_8 = bytes([0, 0, 0, 0])
 try:
     x = 0
     while x in range(0, 10):
         if a == startid_sending:
 
-            if b == IN_Engi_RPM_ID:
-                data_bytes = counter.to_bytes(4, byteorder='little')
+            if c == IN_Engi_RPM_ID:
+                data_bytes = num_send.to_bytes(4, byteorder='little') + bit_5_to_8
 
                 packet = bytes([a, b, c, d]) + data_bytes
 
@@ -69,7 +70,7 @@ try:
                 print("Send IN_Engi_RPM: ", data_bytes)
 
             if b == IN_CK_Gap_ID:
-                data_bytes = counter.to_bytes(4, byteorder='little')
+                data_bytes = num_send.to_bytes(4, byteorder='little') + bit_5_to_8
 
                 packet = bytes([a, b, c, d]) + data_bytes
 
