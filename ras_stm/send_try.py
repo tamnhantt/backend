@@ -47,36 +47,39 @@ IN_AC_PUS_DUTY_ID = 45
 startid_sending = 165
 
 # Nhập 4 byte header 1 lần
-a = int(input("startid (0-255): "))
-b = int(input("pageid (0-255): "))
-c = int(input("typid (0-255): "))
-d = int(input("indexid (0-255): "))
+startid = 165 # var to start read (startid)
+pageid = 195 # =195 to send data if indexid = 5
+typeid = int(input("typid (0-255): ")) #chose what num send?
+indexid = 5 
+
+#a = 165, b = 192, c = 1, d = 5
 
 num_send = int(input("number of packets to send: "))
-
 bit_5_to_8 = bytes([0, 0, 0, 0])
+sending=0
+
+# viet ham nhan tin hieu o day
+
 try:
-    x = 0
-    while x in range(0, 10):
-        if a == startid_sending:
+    while True:
+        if sending == 1:
+            data_bytes = num_send.to_bytes(4, byteorder='little') + bit_5_to_8
+            packet = bytes([startid, pageid, typeid, indexid]) + data_bytes
+            ser.write(packet)
+            sending = 0
 
-            if c == IN_Engi_RPM_ID:
-                data_bytes = num_send.to_bytes(4, byteorder='little') + bit_5_to_8
+            if typeid == IN_Engi_RPM_ID:
+                print("Send IN_Engi_RPM", data_bytes)
 
-                packet = bytes([a, b, c, d]) + data_bytes
+            if typeid == IN_CK_Gap_ID:
+                print("Send IIN_CK_Gap", data_bytes)
+            
+            if typeid == IN_CK_Bate_ID:
+                print("Send IN_Engi_RPM", data_bytes)
 
-                ser.write(packet)
-
-                print("Send IN_Engi_RPM: ", data_bytes)
-
-            if b == IN_CK_Gap_ID:
-                data_bytes = num_send.to_bytes(4, byteorder='little') + bit_5_to_8
-
-                packet = bytes([a, b, c, d]) + data_bytes
-
-                ser.write(packet)
-
-                print("Send IN_CK: IN_CK_Gap", data_bytes)
+        if sending == 0:
+            print("STOP SENDING")
+        
 
 except KeyboardInterrupt:
     print("\n⏹️ STOPPED")
