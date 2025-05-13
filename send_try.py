@@ -4,7 +4,7 @@ from flask import Flask, request, jsonify
 import subprocess
 
 app = Flask(__name__)
-# ------------------------------------------------------
+# ------------------------------------------------------ for engine speed and ckps
 IN_Engi_RPM_ID = 1
 
 IN_CK_Gap_ID = 2
@@ -13,8 +13,9 @@ IN_CK_Bate_ID = 3
 IN_Teeth_different_CMIN_ID = 4;
 IN_Teeth_different_CMOUT_ID = 130;
 
-# ------------------------------------------------------
+# ------------------------------------------------------ for cmps
 
+# cmps hall
 IN_NUM_CAM_Teeth_ID = 5
 IN_CAM_Teeth_1_ID = 6
 IN_CAM_Gap_1_ID = 8
@@ -40,8 +41,7 @@ IN_CAM_Gap_7_ID = 20
 IN_CAM_Teeth_8_ID = 21
 IN_CAM_Gap_8_ID = 23
 
-# ------------------------------------------------------
-
+# cmps induc
 IN_NUM_CAM_INDUCT_Teeth_ID = 25
 IN_CAM_INDUCT_Teeth_1_ID = 26
 IN_CAM_INDUCT_Teeth_2_ID = 28
@@ -61,7 +61,7 @@ IN_CAM_INDUCT_Gap_6_ID = 125
 IN_CAM_INDUCT_Gap_7_ID = 126
 IN_CAM_INDUCT_Gap_8_ID = 127
 
-# ------------------------------------------------------
+# ------------------------------------------------------ for analog signal
 
 IN_H2O1_FRE_ID = 37
 IN_H2O1_OFFSET_ID = 38
@@ -74,11 +74,23 @@ IN_AC_HV_4_DUTY_ID = 60
 IN_AC_SCV_DUTY_ID = 47
 IN_AC_PUS_DUTY_ID = 45
 
-# ------------------------------------------------------
+# ------------------------------------------------------ for ABS / sine? / signal
 
+# ABS bate and speed
+IN_ABS_Bate_ID = 128
+IN_ABS_1_Speed_ID = 129
+IN_ABS_2_Speed_ID = 130
+IN_ABS_3_Speed_ID = 131
+IN_ABS_4_Speed_ID = 132
 
+# ------------------------------------------------------ for digital signal
 
-# ------------------------------------------------------
+IN_HAL_SIG_1_ID = 133
+IN_HAL_SIG_2_ID = 134
+IN_HAL_SIG_3_ID = 135
+IN_HAL_SIG_4_ID = 136
+
+# ------------------------------------------------------ End 
 
 startid_sending = 165
 
