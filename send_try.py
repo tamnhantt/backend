@@ -1,0 +1,142 @@
+# import serial
+# import time
+from flask import Flask, request, jsonify
+import subprocess
+
+app = Flask(__name__)
+# ------------------------------------------------------
+IN_Engi_RPM_ID = 1
+
+IN_CK_Gap_ID = 2
+IN_CK_Bate_ID = 3
+
+IN_Teeth_different_CMIN_ID = 4;
+IN_Teeth_different_CMOUT_ID = 130;
+
+# ------------------------------------------------------
+
+IN_NUM_CAM_Teeth_ID = 5
+IN_CAM_Teeth_1_ID = 6
+IN_CAM_Gap_1_ID = 8
+
+IN_CAM_Teeth_2_ID = 9
+IN_CAM_Gap_2_ID = 11
+
+IN_CAM_Teeth_3_ID = 10
+IN_CAM_Gap_3_ID = 12
+
+IN_CAM_Teeth_4_ID = 13
+IN_CAM_Gap_4_ID = 15
+
+IN_CAM_Teeth_5_ID = 14
+IN_CAM_Gap_5_ID = 16
+
+IN_CAM_Teeth_6_ID = 17
+IN_CAM_Gap_6_ID = 19
+
+IN_CAM_Teeth_7_ID = 18
+IN_CAM_Gap_7_ID = 20
+
+IN_CAM_Teeth_8_ID = 21
+IN_CAM_Gap_8_ID = 23
+
+# ------------------------------------------------------
+
+IN_NUM_CAM_INDUCT_Teeth_ID = 25
+IN_CAM_INDUCT_Teeth_1_ID = 26
+IN_CAM_INDUCT_Teeth_2_ID = 28
+IN_CAM_INDUCT_Teeth_3_ID = 29
+IN_CAM_INDUCT_Teeth_4_ID = 31
+IN_CAM_INDUCT_Teeth_5_ID = 30
+IN_CAM_INDUCT_Teeth_6_ID = 32
+IN_CAM_INDUCT_Teeth_7_ID = 33
+IN_CAM_INDUCT_Teeth_8_ID = 35
+
+IN_CAM_INDUCT_Gap_1_ID = 120
+IN_CAM_INDUCT_Gap_2_ID = 121
+IN_CAM_INDUCT_Gap_3_ID = 122
+IN_CAM_INDUCT_Gap_4_ID = 123
+IN_CAM_INDUCT_Gap_5_ID = 124
+IN_CAM_INDUCT_Gap_6_ID = 125
+IN_CAM_INDUCT_Gap_7_ID = 126
+IN_CAM_INDUCT_Gap_8_ID = 127
+
+# ------------------------------------------------------
+
+IN_H2O1_FRE_ID = 37
+IN_H2O1_OFFSET_ID = 38
+IN_H2O1_VOL_PEAK_ID = 40
+IN_AC_HV_1_FRE_ID = 41
+IN_AC_HV_1_DUTY_ID = 43
+IN_AC_HV_2_DUTY_ID = 44
+IN_AC_HV_3_DUTY_ID = 59
+IN_AC_HV_4_DUTY_ID = 60
+IN_AC_SCV_DUTY_ID = 47
+IN_AC_PUS_DUTY_ID = 45
+
+# ------------------------------------------------------
+
+
+
+# ------------------------------------------------------
+
+startid_sending = 165
+
+# Nhập 4 byte header 1 lần
+startid = 165 # var to start read (startid)
+pageid = 195 # =195 to send data if indexid = 5
+# typeid = int(input("typid (0-255): ")) #chose what num send?
+indexid = 5 
+
+#a = 165, b = 192, c = 1, d = 5
+
+# num_send = int(input("number of packets to send: "))
+bit_5_to_8 = bytes([0, 0, 0, 0])
+sending=0
+
+# ser = serial.Serial('/dev/serial0', 115200, timeout=1) #open uart port
+
+
+#function to read data from app
+
+@app.route('/send', methods=['POST'])
+def receive_data():
+    try:
+        data = request.get_json()
+        field = data.get('field')
+        value = data.get('value')
+
+        field_map = {
+            "rpm": IN_Engi_RPM_ID,
+            "gap": IN_CK_Gap_ID,
+            "bate": IN_CK_Bate_ID
+        }
+        typeid = field_map.get(field.lower())
+
+        if field is None or value is None:
+            return jsonify({"error": "Thiếu 'field' hoặc 'value'"}), 400
+        
+    except Exception as e:
+        return jsonify({"error": f"An error occurred: {str(e)}"}), 500
+
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+    # print(f"{typeid}, {value}")
+    # receive_data()
+
+#function to send uart
+# try:
+#     while True:
+#         if sending == 1:
+#             data_bytes = num_send.to_bytes(4, byteorder='little') + bit_5_to_8
+#             packet = bytes([startid, pageid, typeid, indexid]) + data_bytes
+#             ser.write(packet)
+#             sending = 0
+
+#            
+        
+
+# except KeyboardInterrupt:
+#     print("\n⏹️ STOPPED")
