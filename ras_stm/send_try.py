@@ -124,8 +124,8 @@ def receive_data():
     try:
         data = request.get_json()
         field = data.get('field')
-        data = data.get('value')
-        addr = data.get('addr')
+        data = int(data['value'])
+        addr = int(data['addr'])
         field_map = {
             "rpm": IN_Engi_RPM_ID,
             "gap": IN_CK_Gap_ID,
