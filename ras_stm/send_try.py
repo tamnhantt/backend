@@ -179,6 +179,8 @@ def receive_data():
             "tpms" : IN_TPMS_W_LAMP_ID,
             "abs" : IN_ABS_W_LAMP_ID,
             "sbelt" : IN_SEATBELT_ID,
+            "mdps" : IN_CF_Mdps_WLmp,
+            "ebd" : IN_EBD_W_LAMP_ID ,
         }
         if not field or value is None or addr is None:
             return jsonify({"error": "Thiếu 'field', 'value', hoặc 'addr'"}), 400
