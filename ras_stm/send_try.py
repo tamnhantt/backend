@@ -135,8 +135,8 @@ def receive_data():
             "MIL" : IN_MIL_LIGHT_ID,
         }
         typeid = field_map.get(field.lower())
-        address = int([addr])
-        data = int([value])
+        address = int(addr)
+        data = int(value)
         if field is None or data is None:
             return jsonify({"error": "Thiếu 'field' hoặc 'value'"}), 400
         
