@@ -107,7 +107,7 @@ pageid = 195 # =195 to send data if indexid = 5
 # typeid = int(input("typid (0-255): ")) #chose what num send?
 indexid = 5 
 typeid = 0
-data = 0
+value = 0
 #a = 165, b = 192, c = 1, d = 5
 
 # num_send = int(input("number of packets to send: "))
@@ -124,7 +124,7 @@ def receive_data():
     try:
         data = request.get_json()
         field = data.get('field')
-        data = int(data['value'])
+        value = int(data['value'])
         addr = int(data['addr'])
         field_map = {
             "rpm": IN_Engi_RPM_ID,
@@ -151,7 +151,7 @@ if __name__ == '__main__':
 try:
     if (addr == 1):
         while True:
-            bus.write_i2c_block_data(0X12, 0x00, [0, typeid, data])
+            bus.write_i2c_block_data(0X12, 0x00, [0, typeid, value])
             
 
 #            
