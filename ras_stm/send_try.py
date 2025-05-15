@@ -108,6 +108,8 @@ pageid = 195 # =195 to send data if indexid = 5
 indexid = 5 
 typeid = 0
 value = 0
+address = 0
+data = 0
 #a = 165, b = 192, c = 1, d = 5
 
 # num_send = int(input("number of packets to send: "))
@@ -124,8 +126,8 @@ def receive_data():
     try:
         data = request.json
         field = data.get('field')
-        value = int(data['value'])
-        addr = int(data['addr'])
+        value = data.get('value')
+        addr = data.get('addr')
         field_map = {
             "rpm": IN_Engi_RPM_ID,
             "gap": IN_CK_Gap_ID,
@@ -133,6 +135,8 @@ def receive_data():
             "MIL" : IN_MIL_LIGHT_ID,
         }
         typeid = field_map.get(field.lower())
+        address = int([addr])
+        data = int([value])
         if field is None or data is None:
             return jsonify({"error": "Thiếu 'field' hoặc 'value'"}), 400
         
@@ -149,9 +153,9 @@ if __name__ == '__main__':
 
 # function to send i2c
 try:
-    if (addr == 1):
+    if (address == 1):
         while True:
-            bus.write_i2c_block_data(0X12, 0x00, [0, typeid, value])
+            bus.write_i2c_block_data(0X12, 0x00, [0, typeid, data])
             
 
 #            
