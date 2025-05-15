@@ -175,7 +175,7 @@ def receive_data():
             "rpm": IN_Engi_RPM_ID,
             "gap": IN_CK_Gap_ID,
             "bate": IN_CK_Bate_ID,
-            "MIL" : IN_MIL_LIGHT_ID,
+            "mil" : IN_MIL_LIGHT_ID,
         }
         if not field or value is None or addr is None:
             return jsonify({"error": "Thiếu 'field', 'value', hoặc 'addr'"}), 400
