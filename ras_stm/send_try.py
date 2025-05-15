@@ -125,7 +125,7 @@ def receive_data():
         data = request.get_json()
         field = data.get('field')
         data = data.get('value')
-
+        addr = data.get('addr')
         field_map = {
             "rpm": IN_Engi_RPM_ID,
             "gap": IN_CK_Gap_ID,
@@ -133,7 +133,7 @@ def receive_data():
             "MIL" : IN_MIL_LIGHT_ID,
         }
         typeid = field_map.get(field.lower())
-        if field is None or value is None:
+        if field is None or data is None:
             return jsonify({"error": "Thiếu 'field' hoặc 'value'"}), 400
         
     except Exception as e:
@@ -142,16 +142,17 @@ def receive_data():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host = '0.0.0.0',port =8000)
     # print(f"{typeid}, {value}")``
     receive_data()
+    
 
 # function to send i2c
 try:
-    while True:
-        if sending == 1:
-            bus.write_i2c_block_data(addr, 0x00, [0, typeid, data])
-            sending = 0
+    if (addr == 1):
+        while True:
+            bus.write_i2c_block_data(0X12, 0x00, [0, typeid, data])
+            
 
 #            
         
