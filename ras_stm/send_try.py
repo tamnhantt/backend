@@ -121,10 +121,53 @@ addr = 0
 
 #function to read data from app
 
+# @app.route('/send', methods=['POST'])
+# def receive_data():
+#     try:
+#         data = request.get_json()
+#         field = data.get('field')
+#         value = data.get('value')
+#         addr = data.get('addr')
+#         field_map = {
+#             "rpm": IN_Engi_RPM_ID,
+#             "gap": IN_CK_Gap_ID,
+#             "bate": IN_CK_Bate_ID,
+#             "MIL" : IN_MIL_LIGHT_ID,
+#         }
+#         typeid = field_map.get(field.lower())
+#         address = int(addr)
+#         data = int(value)
+#         if field is None or data is None:
+#             return jsonify({"error": "Thiếu 'field' hoặc 'value'"}), 400
+        
+#     except Exception as e:
+#         return jsonify({"error": f"An error occurred: {str(e)}"}), 500
+
+
+
+# if __name__ == '__main__':
+#     app.run(host = '0.0.0.0',port =8000)
+#     # print(f"{typeid}, {value}")``
+#     receive_data()
+    
+
+# # function to send i2c
+# try:
+#     if (address == 1):
+#         while True:
+#             bus.write_i2c_block_data(0X12, 0x00, [0, typeid, data])
+            
+
+# #            
+        
+
+# except KeyboardInterrupt:
+#     print("\n⏹️ STOPPED")
 @app.route('/send', methods=['POST'])
 def receive_data():
     try:
-        data = request.get_json()
+        # Lấy dữ liệu từ Flutter
+        data = request.get_json(force=True)
         field = data.get('field')
         value = data.get('value')
         addr = data.get('addr')
@@ -134,32 +177,29 @@ def receive_data():
             "bate": IN_CK_Bate_ID,
             "MIL" : IN_MIL_LIGHT_ID,
         }
-        typeid = field_map.get(field.lower())
+        if not field or value is None or addr is None:
+            return jsonify({"error": "Thiếu 'field', 'value', hoặc 'addr'"}), 400
+
+        field = field.lower()
+        typeid = field_map.get(field)
+
+        if typeid is None:
+            return jsonify({"error": f"Trường '{field}' không hợp lệ"}), 400
+
+        # Ép kiểu
         address = int(addr)
-        data = int(value)
-        if field is None or data is None:
-            return jsonify({"error": "Thiếu 'field' hoặc 'value'"}), 400
-        
+        value = int(value)
+        if address == 1:
+        # Gửi dữ liệu qua I2C
+            bus.write_i2c_block_data(0x12, 0x00, [0, typeid, value])
+
+        return jsonify({
+            "status": "ok",
+            "sent": {"addr": address, "typeid": typeid, "value": value}
+        })
+
     except Exception as e:
-        return jsonify({"error": f"An error occurred: {str(e)}"}), 500
-
-
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(host = '0.0.0.0',port =8000)
-    # print(f"{typeid}, {value}")``
-    receive_data()
-    
-
-# function to send i2c
-try:
-    if (address == 1):
-        while True:
-            bus.write_i2c_block_data(0X12, 0x00, [0, typeid, data])
-            
-
-#            
-        
-
-except KeyboardInterrupt:
-    print("\n⏹️ STOPPED")
+    app.run(host='0.0.0.0', port=8000)
