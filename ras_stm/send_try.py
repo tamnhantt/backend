@@ -124,7 +124,7 @@ addr = 0
 @app.route('/send', methods=['POST'])
 def receive_data():
     try:
-        data = request.json
+        data = request.get_json(force=True)
         field = data.get('field')
         value = data.get('value')
         addr = data.get('addr')
