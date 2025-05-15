@@ -2,10 +2,10 @@
 # import time
 import smbus
 bus = smbus.SMBus(1)
-# from flask iport Flask, request, jsonify
-# import subprocess
+from flask import Flask, request, jsonify
+import subprocess
 
-# app = Flask(__name__)
+app = Flask(__name__)
 # ------------------------------------------------------
 IN_Engi_RPM_ID = 1
 
