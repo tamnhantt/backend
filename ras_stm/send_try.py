@@ -1,9 +1,11 @@
 # import serial
 # import time
-from flask import Flask, request, jsonify
-import subprocess
+import smbus
+bus = smbus.SMBus(1)
+# from flask iport Flask, request, jsonify
+# import subprocess
 
-app = Flask(__name__)
+# app = Flask(__name__)
 # ------------------------------------------------------
 IN_Engi_RPM_ID = 1
 
@@ -75,7 +77,24 @@ IN_AC_SCV_DUTY_ID = 47
 IN_AC_PUS_DUTY_ID = 45
 
 # ------------------------------------------------------
+IN_MIL_LIGHT_ID  = 1;
+IN_BAT_LAMP_STAT_ID = 2;
+IN_TPMS_W_LAMP_ID = 3;
+IN_ABS_W_LAMP_ID = 4;
+IN_EBD_W_LAMP_ID = 5;
+IN_xSG_TCS_OFF_LAMP_ID = 6;
+IN_CF_Mdps_WLmp = 7;
 
+#----------------------------------------------------------- from open dpc - lights
+IN_CF_Gway_TurnSigRh_ID = 50;
+IN_CF_Gway_TurnSigLh_ID = 51;
+IN_SEATBELT_ID = 52;
+
+#// ----------------------------------------------------------- from kia_picato_dbc
+
+IN_SPEED_MOTOR_ID = 100;
+IN_TEMP_ENG_ID = 101;
+IN_WHEEL_SPD_ID = 102;
 
 
 # ------------------------------------------------------
@@ -87,13 +106,14 @@ startid = 165 # var to start read (startid)
 pageid = 195 # =195 to send data if indexid = 5
 # typeid = int(input("typid (0-255): ")) #chose what num send?
 indexid = 5 
-
+typeid = 0
+data = 0
 #a = 165, b = 192, c = 1, d = 5
 
 # num_send = int(input("number of packets to send: "))
 bit_5_to_8 = bytes([0, 0, 0, 0])
 sending=0
-
+addr = 0
 # ser = serial.Serial('/dev/serial0', 115200, timeout=1) #open uart port
 
 
@@ -104,15 +124,15 @@ def receive_data():
     try:
         data = request.get_json()
         field = data.get('field')
-        value = data.get('value')
+        data = data.get('value')
 
         field_map = {
             "rpm": IN_Engi_RPM_ID,
             "gap": IN_CK_Gap_ID,
-            "bate": IN_CK_Bate_ID
+            "bate": IN_CK_Bate_ID,
+            "MIL" : IN_MIL_LIGHT_ID,
         }
         typeid = field_map.get(field.lower())
-
         if field is None or value is None:
             return jsonify({"error": "Thiếu 'field' hoặc 'value'"}), 400
         
@@ -123,20 +143,18 @@ def receive_data():
 
 if __name__ == '__main__':
     app.run(debug=True)
-    # print(f"{typeid}, {value}")
-    # receive_data()
+    # print(f"{typeid}, {value}")``
+    receive_data()
 
-#function to send uart
-# try:
-#     while True:
-#         if sending == 1:
-#             data_bytes = num_send.to_bytes(4, byteorder='little') + bit_5_to_8
-#             packet = bytes([startid, pageid, typeid, indexid]) + data_bytes
-#             ser.write(packet)
-#             sending = 0
+# function to send i2c
+try:
+    while True:
+        if sending == 1:
+            bus.write_i2c_block_data(addr, 0x00, [0, typeid, data])
+            sending = 0
 
 #            
         
 
-# except KeyboardInterrupt:
-#     print("\n⏹️ STOPPED")
+except KeyboardInterrupt:
+    print("\n⏹️ STOPPED")
