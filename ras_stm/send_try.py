@@ -117,7 +117,7 @@ data = 0
 #a = 165, b = 192, c = 1, d = 5
 
 # num_send = int(input("number of packets to send: "))
-bit_5_to_8 = bytes([0, 0, 0, 0])
+bit_5_to_8 = [0, 0, 0, 0]
 sending=0
 addr = 0
 # ser = serial.Serial('/dev/serial0', 115200, timeout=1) #open uart port
