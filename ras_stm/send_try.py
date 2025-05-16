@@ -204,7 +204,7 @@ def receive_data():
             bus.write_i2c_block_data(0x12, 0x00, [0, typeid, value])
         if address == 2:
             value_bytes = list(value.to_bytes(4, 'little'))
-            datasend = [startid, pageid, typeid, indexid] + value_bytes + [bit_5_to_8]
+            datasend = [startid, pageid, typeid, indexid] + value_bytes + bit_5_to_8
             bus.write_i2c_block_data(0x10, 0x00, datasend)
         return jsonify({
             "status": "ok",
