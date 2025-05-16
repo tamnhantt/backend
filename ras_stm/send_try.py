@@ -179,6 +179,7 @@ def receive_data():
             "rpm": IN_Engi_RPM_ID,
             "gap": IN_CK_Gap_ID,
             "bate": IN_CK_Bate_ID,
+            "crksend": IN_CK_Generate_ID,
             "mil" : IN_MIL_LIGHT_ID,
             "tpms" : IN_TPMS_W_LAMP_ID,
             "abs" : IN_ABS_W_LAMP_ID,
@@ -202,8 +203,8 @@ def receive_data():
         # Gửi dữ liệu qua I2C
             bus.write_i2c_block_data(0x12, 0x00, [0, typeid, value])
         if address == 2:
-            bus.write_i2c_block_data(startid, pageid, typeid, indexid, value.to_bytes(4, 'small'), bit_5_to_8)
-
+            datasend = startid, pageid, typeid, indexid, value.to_bytes(4, 'little'), bit_5_to_8
+            bus.write_i2c_block_data(0x10, 0x00, datasend)
         return jsonify({
             "status": "ok",
             "sent": {"addr": address, "typeid": typeid, "value": value}
