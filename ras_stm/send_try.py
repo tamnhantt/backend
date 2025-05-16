@@ -17,6 +17,10 @@ IN_Teeth_different_CMOUT_ID = 130;
 
 # ------------------------------------------------------
 
+IN_CK_Generate_ID = 150
+
+# ------------------------------------------------------
+
 IN_NUM_CAM_Teeth_ID = 5
 IN_CAM_Teeth_1_ID = 6
 IN_CAM_Gap_1_ID = 8
@@ -197,6 +201,8 @@ def receive_data():
         if address == 1:
         # Gửi dữ liệu qua I2C
             bus.write_i2c_block_data(0x12, 0x00, [0, typeid, value])
+        if address == 2:
+            bus.write_i2c_block_data(startid, pageid, typeid, indexid, value.to_bytes(4, 'small'), bit_5_to_8)
 
         return jsonify({
             "status": "ok",
