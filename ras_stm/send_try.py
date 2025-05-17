@@ -18,6 +18,8 @@ IN_Teeth_different_CMOUT_ID = 130;
 # ------------------------------------------------------
 
 IN_CK_Generate_ID = 150
+IN_CAM_HALL_Generate_ID = 151
+IN_CAM_INDUCT_Generate_ID = 152
 
 # ------------------------------------------------------
 
@@ -179,7 +181,32 @@ def receive_data():
             "rpm": IN_Engi_RPM_ID,
             "gap": IN_CK_Gap_ID,
             "bate": IN_CK_Bate_ID,
+
+            "difin": IN_Teeth_different_CMIN_ID,
+            "difout": IN_Teeth_different_CMOUT_ID,
+
             "crksend": IN_CK_Generate_ID,
+            "camhallsend": IN_CAM_HALL_Generate_ID,
+            "caminductsend": IN_CAM_INDUCT_Generate_ID,
+
+            "numcaminduct": IN_NUM_CAM_INDUCT_Teeth_ID,
+            "camteeth1": IN_CAM_INDUCT_Teeth_1_ID,
+            "camteeth2": IN_CAM_INDUCT_Teeth_2_ID,
+            "camteeth3": IN_CAM_INDUCT_Teeth_3_ID,
+            "camteeth4": IN_CAM_INDUCT_Teeth_4_ID,
+            "camteeth5": IN_CAM_INDUCT_Teeth_5_ID,
+            "camteeth6": IN_CAM_INDUCT_Teeth_6_ID,
+            "camteeth7": IN_CAM_INDUCT_Teeth_7_ID,
+            "camteeth8": IN_CAM_INDUCT_Teeth_8_ID,
+            "camgap1": IN_CAM_INDUCT_Gap_1_ID,
+            "camgap2": IN_CAM_INDUCT_Gap_2_ID,
+            "camgap3": IN_CAM_INDUCT_Gap_3_ID,
+            "camgap4": IN_CAM_INDUCT_Gap_4_ID,
+            "camgap5": IN_CAM_INDUCT_Gap_5_ID,
+            "camgap6": IN_CAM_INDUCT_Gap_6_ID,
+            "camgap7": IN_CAM_INDUCT_Gap_7_ID,
+            "camgap8": IN_CAM_INDUCT_Gap_8_ID,
+
             "mil" : IN_MIL_LIGHT_ID,
             "tpms" : IN_TPMS_W_LAMP_ID,
             "abs" : IN_ABS_W_LAMP_ID,
