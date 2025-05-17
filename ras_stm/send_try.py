@@ -225,6 +225,15 @@ def receive_data():
 
             "abssend": IN_ABS_Generate_ID,
 
+            "ana1": IN_AC_HV_1_DUTY_ID,
+            "ana2": IN_AC_HV_2_DUTY_ID,
+            "ana3": IN_AC_HV_3_DUTY_ID,
+            "ana4": IN_AC_HV_4_DUTY_ID,
+            "ana5": IN_AC_SCV_DUTY_ID,
+            "ana6": IN_AC_PUS_DUTY_ID,
+
+            
+
             "mil" : IN_MIL_LIGHT_ID,
             "tpms" : IN_TPMS_W_LAMP_ID,
             "abs" : IN_ABS_W_LAMP_ID,
