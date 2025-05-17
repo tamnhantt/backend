@@ -71,9 +71,9 @@ IN_CAM_INDUCT_Gap_8_ID = 127
 
 # ------------------------------------------------------
 
-IN_H2O1_FRE_ID = 37
-IN_H2O1_OFFSET_ID = 38
-IN_H2O1_VOL_PEAK_ID = 40
+# IN_H2O1_FRE_ID = 37
+# IN_H2O1_OFFSET_ID = 38
+# IN_H2O1_VOL_PEAK_ID = 40
 IN_AC_HV_1_FRE_ID = 41
 IN_AC_HV_1_DUTY_ID = 43
 IN_AC_HV_2_DUTY_ID = 44
@@ -81,6 +81,19 @@ IN_AC_HV_3_DUTY_ID = 59
 IN_AC_HV_4_DUTY_ID = 60
 IN_AC_SCV_DUTY_ID = 47
 IN_AC_PUS_DUTY_ID = 45
+
+# ------------------------------------------------------
+
+IN_ABS_Bate_ID = 128
+IN_ABS_1_Speed_ID = 129
+IN_ABS_2_Speed_ID = 130
+IN_ABS_3_Speed_ID = 131
+IN_ABS_4_Speed_ID = 132
+
+IN_ABS_1_Generate_ID = 150
+IN_ABS_2_Generate_ID = 151
+IN_ABS_3_Generate_ID = 152
+IN_ABS_4_Generate_ID = 153
 
 # ------------------------------------------------------
 IN_MIL_LIGHT_ID  = 1;
@@ -206,6 +219,17 @@ def receive_data():
             "camgap6": IN_CAM_INDUCT_Gap_6_ID,
             "camgap7": IN_CAM_INDUCT_Gap_7_ID,
             "camgap8": IN_CAM_INDUCT_Gap_8_ID,
+
+            "absbate": IN_ABS_Bate_ID,
+            "abs1speed": IN_ABS_1_Speed_ID,
+            "abs2speed": IN_ABS_2_Speed_ID,
+            "abs3speed": IN_ABS_3_Speed_ID,
+            "abs4speed": IN_ABS_4_Speed_ID,
+
+            "abs1send": IN_ABS_1_Generate_ID,
+            "abs2send": IN_ABS_2_Generate_ID,
+            "abs3send": IN_ABS_3_Generate_ID,
+            "abs4send": IN_ABS_4_Generate_ID,
 
             "mil" : IN_MIL_LIGHT_ID,
             "tpms" : IN_TPMS_W_LAMP_ID,
