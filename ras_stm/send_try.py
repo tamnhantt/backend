@@ -232,7 +232,10 @@ def receive_data():
             "ana5": IN_AC_SCV_DUTY_ID,
             "ana6": IN_AC_PUS_DUTY_ID,
 
-            
+            "act1": IN_AC_HV_1_DUTY_ID,
+            "act2": IN_AC_HV_2_DUTY_ID,
+            "act3": IN_AC_HV_3_DUTY_ID,
+            "act4": IN_AC_HV_4_DUTY_ID,
 
             "mil" : IN_MIL_LIGHT_ID,
             "tpms" : IN_TPMS_W_LAMP_ID,
