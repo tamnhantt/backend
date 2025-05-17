@@ -54,8 +54,8 @@ IN_NUM_CAM_INDUCT_Teeth_ID = 25
 IN_CAM_INDUCT_Teeth_1_ID = 26
 IN_CAM_INDUCT_Teeth_2_ID = 28
 IN_CAM_INDUCT_Teeth_3_ID = 29
-IN_CAM_INDUCT_Teeth_4_ID = 30
-IN_CAM_INDUCT_Teeth_5_ID = 31
+IN_CAM_INDUCT_Teeth_4_ID = 31
+IN_CAM_INDUCT_Teeth_5_ID = 30
 IN_CAM_INDUCT_Teeth_6_ID = 32
 IN_CAM_INDUCT_Teeth_7_ID = 33
 IN_CAM_INDUCT_Teeth_8_ID = 35
@@ -251,6 +251,10 @@ def receive_data():
             value_bytes = list(value.to_bytes(4, 'little'))
             datasend = [165, 192, typeid, 5] + value_bytes + bit_5_to_8
             bus.write_i2c_block_data(0x10, 0x00, datasend)
+        if address == 3:
+            value_bytes = list(value.to_bytes(4, 'little'))
+            datasend = [165, 192, typeid, 5] + value_bytes + bit_5_to_8
+            bus.write_i2c_block_data(0x20, 0x00, datasend)
         return jsonify({
             "status": "ok",
             "sent": {"addr": address, "typeid": typeid, "value": value}
