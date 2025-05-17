@@ -90,10 +90,7 @@ IN_ABS_2_Speed_ID = 130
 IN_ABS_3_Speed_ID = 131
 IN_ABS_4_Speed_ID = 132
 
-IN_ABS_1_Generate_ID = 150
-IN_ABS_2_Generate_ID = 151
-IN_ABS_3_Generate_ID = 152
-IN_ABS_4_Generate_ID = 153
+IN_ABS_Generate_ID = 150
 
 # ------------------------------------------------------
 IN_MIL_LIGHT_ID  = 1;
@@ -226,10 +223,7 @@ def receive_data():
             "abs3speed": IN_ABS_3_Speed_ID,
             "abs4speed": IN_ABS_4_Speed_ID,
 
-            "abs1send": IN_ABS_1_Generate_ID,
-            "abs2send": IN_ABS_2_Generate_ID,
-            "abs3send": IN_ABS_3_Generate_ID,
-            "abs4send": IN_ABS_4_Generate_ID,
+            "abssend": IN_ABS_Generate_ID,
 
             "mil" : IN_MIL_LIGHT_ID,
             "tpms" : IN_TPMS_W_LAMP_ID,
