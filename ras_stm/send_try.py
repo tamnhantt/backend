@@ -80,7 +80,7 @@ IN_AC_HV_2_DUTY_ID = 44
 IN_AC_HV_3_DUTY_ID = 59
 IN_AC_HV_4_DUTY_ID = 60
 IN_AC_SCV_DUTY_ID = 47
-IN_AC_PUS_DUTY_ID = 45
+IN_AC_PUS_DUTY_ID = 48
 
 # ------------------------------------------------------
 
