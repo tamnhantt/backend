@@ -258,6 +258,7 @@ def receive_data():
         if address == 1:
         # Gửi dữ liệu qua I2C
             bus.write_i2c_block_data(0x12, 0x00, [0, typeid, value])
+            print(value)
         if address == 2:
             value_bytes = list(value.to_bytes(4, 'little'))
             datasend = [165, 192, typeid, 5] + value_bytes + bit_5_to_8
