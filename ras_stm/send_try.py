@@ -257,11 +257,13 @@ def receive_data():
         value = int(value)
         if address == 1:
         # Gửi dữ liệu qua I2C
-            packed = struct.pack('>H', value)
-            value_bytes = list(packed)
+            if typeid == IN_WHEEL_SPD_ID:
+                packed = struct.pack('>H', value)
+                value_bytes = list(packed)
             # bus.write_i2c_block_data(0x12, 0x00, [0, typeid, value])
-            bus.write_i2c_block_data(0x12, 0x00, [0, typeid] + value_bytes)
-            print(value)
+                bus.write_i2c_block_data(0x12, 0x00, [0, typeid] + value_bytes)
+                print(value)
+            bus.write_i2c_block_data(0x12, 0x00, [0, typeid, value])
         if address == 2:
             value_bytes = list(value.to_bytes(4, 'little'))
             datasend = [165, 192, typeid, 5] + value_bytes + bit_5_to_8
