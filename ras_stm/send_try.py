@@ -234,12 +234,14 @@ def receive_data():
 
             "act" : IN_AC_HV_1_FRE_ID,
 
-            "mil" : IN_MIL_LIGHT_ID,
-            "tpms" : IN_TPMS_W_LAMP_ID,
-            "abs" : IN_ABS_W_LAMP_ID,
-            "sbelt" : IN_SEATBELT_ID,
-            "mdps" : IN_CF_Mdps_WLmp,
-            "ebd" : IN_EBD_W_LAMP_ID ,
+            "kia_mil" : IN_MIL_LIGHT_ID,
+            "kia_tpms" : IN_TPMS_W_LAMP_ID,
+            "kia_abs" : IN_ABS_W_LAMP_ID,
+            "kia_sbelt" : IN_SEATBELT_ID,
+            "kia_mdps" : IN_CF_Mdps_WLmp,
+            "kia_ebd" : IN_EBD_W_LAMP_ID ,
+            "kia_engine_spd" : IN_SPEED_MOTOR_ID,
+            "kia_veh_spd" : IN_WHEEL_SPD_ID ,
         }
         if not field or value is None or addr is None:
             return jsonify({"error": "Thiếu 'field', 'value', hoặc 'addr'"}), 400
