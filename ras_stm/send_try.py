@@ -4,7 +4,7 @@ import smbus
 bus = smbus.SMBus(1)
 from flask import Flask, request, jsonify
 import subprocess
-
+import struct
 app = Flask(__name__)
 # ------------------------------------------------------
 IN_Engi_RPM_ID = 1
@@ -257,7 +257,10 @@ def receive_data():
         value = int(value)
         if address == 1:
         # Gửi dữ liệu qua I2C
-            bus.write_i2c_block_data(0x12, 0x00, [0, typeid, value])
+            packed = struct.pack('>H', value)
+            value_bytes = list(packed)
+            # bus.write_i2c_block_data(0x12, 0x00, [0, typeid, value])
+            bus.write_i2c_block_data(0x12, 0x00, [0, typeid] + value_bytes)
             print(value)
         if address == 2:
             value_bytes = list(value.to_bytes(4, 'little'))
