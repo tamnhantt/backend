@@ -260,12 +260,13 @@ def receive_data():
             if typeid == IN_WHEEL_SPD_ID:
                 # high_byte = (value >> 8) & 0xFF  # Lấy 8 bit cao = 0x0B = 11
                 low_byte  = value & 0xFF
-                high_byte = (value >> 8) & 0xFF       
-                # value_bytes = list(packed)        # [0x00, 0x00, 0x0B, 0xB8]
-                bus.write_i2c_block_data(0x12, 0x00, [0, typeid, high_byte, low_byte])
+                high_byte = (value >> 8) & 0xFF
                 print(value)
                 print(low_byte)
-                print(high_byte)
+                print(high_byte)       
+                # value_bytes = list(packed)        # [0x00, 0x00, 0x0B, 0xB8]
+                bus.write_i2c_block_data(0x12, 0x00, [0, typeid, high_byte, low_byte])
+                
             else:  
                 bus.write_i2c_block_data(0x12, 0x00, [typeid, value])
             time.sleep(0.05)
