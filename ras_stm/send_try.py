@@ -256,10 +256,10 @@ def receive_data():
         address = int(addr)
         value = int(value)
         if address == 1:
-            
+            print(1)
         # Gửi dữ liệu qua I2C
             if typeid == IN_WHEEL_SPD_ID:
-                print(1)
+                print(2)
                 # high_byte = (value >> 8) & 0xFF  # Lấy 8 bit cao = 0x0B = 11
                 low_byte  = value & 0xFF
                 high_byte = (value >> 8) & 0xFF
@@ -270,6 +270,7 @@ def receive_data():
                 bus.write_i2c_block_data(0x12, 0x00, [0, typeid, high_byte, low_byte])
                 
             else:  
+                print(3)
                 bus.write_i2c_block_data(0x12, 0x00, [typeid, value])
             time.sleep(0.05)
         if address == 2:
