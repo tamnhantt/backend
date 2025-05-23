@@ -100,7 +100,7 @@ IN_ABS_W_LAMP_ID = 4;
 IN_EBD_W_LAMP_ID = 5;
 IN_xSG_TCS_OFF_LAMP_ID = 6;
 IN_CF_Mdps_WLmp = 7;
-IN_xSG_TCS_OFF_LAMP_ID = 8;
+IN_xSG_TCS_LAMP_ID = 8;
 
 #----------------------------------------------------------- from open dpc - lights
 IN_CF_Gway_TurnSigRh_ID = 50;
