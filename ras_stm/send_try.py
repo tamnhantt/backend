@@ -100,6 +100,7 @@ IN_ABS_W_LAMP_ID = 4;
 IN_EBD_W_LAMP_ID = 5;
 IN_xSG_TCS_OFF_LAMP_ID = 6;
 IN_CF_Mdps_WLmp = 7;
+IN_xSG_TCS_OFF_LAMP_ID = 8;
 
 #----------------------------------------------------------- from open dpc - lights
 IN_CF_Gway_TurnSigRh_ID = 50;
@@ -242,6 +243,8 @@ def receive_data():
             "kia_ebd" : IN_EBD_W_LAMP_ID ,
             "kia_engine_spd" : IN_SPEED_MOTOR_ID,
             "kia_veh_spd" : IN_WHEEL_SPD_ID ,
+            "kia_tcs" : IN_xSG_TCS_LAMP_ID,
+            "kia_tcs_off" : IN_xSG_TCS_OFF_LAMP_ID,
         }
         if not field or value is None or addr is None:
             return jsonify({"error": "Thiếu 'field', 'value', hoặc 'addr'"}), 400
@@ -259,18 +262,7 @@ def receive_data():
             print(1)
             low_byte  = value & 0xFF
             high_byte = (value >> 8) & 0xFF
-        # Gửi dữ liệu qua I2C
-            if typeid == 100:
-                print(2)
-                # high_byte = (value >> 8) & 0xFF  # Lấy 8 bit cao = 0x0B = 11
-                print(value)
-                print(low_byte)
-                print(high_byte)       
-                # value_bytes = list(packed)        # [0x00, 0x00, 0x0B, 0xB8]
-                bus.write_i2c_block_data(0x12, 0x00, [typeid, high_byte, low_byte])
-            else:
-                print(3)
-                bus.write_i2c_block_data(0x12, 0x00, [typeid, high_byte, low_byte])
+            bus.write_i2c_block_data(0x12, 0x00, [typeid, high_byte, low_byte])
             time.sleep(0.05)
         if address == 2:
             value_bytes = list(value.to_bytes(4, 'little'))
