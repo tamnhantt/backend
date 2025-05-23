@@ -1,5 +1,5 @@
 # import serial
-# import time
+import time
 import smbus
 bus = smbus.SMBus(1)
 from flask import Flask, request, jsonify
@@ -264,14 +264,19 @@ def receive_data():
                 print(value)
             else:  
                 bus.write_i2c_block_data(0x12, 0x00, [0, typeid, value])
+            time.sleep(0.05)
         if address == 2:
             value_bytes = list(value.to_bytes(4, 'little'))
             datasend = [165, 192, typeid, 5] + value_bytes + bit_5_to_8
             bus.write_i2c_block_data(0x10, 0x00, datasend)
+            time.sleep(0.05)
+
         if address == 3:
             value_bytes = list(value.to_bytes(4, 'little'))
             datasend = [165, 192, typeid, 5] + value_bytes + bit_5_to_8
             bus.write_i2c_block_data(0x20, 0x00, datasend)
+            time.sleep(0.05)
+
         return jsonify({
             "status": "ok",
             "sent": {"addr": address, "typeid": typeid, "value": value}
