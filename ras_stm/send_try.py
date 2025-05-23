@@ -268,10 +268,9 @@ def receive_data():
                 print(high_byte)       
                 # value_bytes = list(packed)        # [0x00, 0x00, 0x0B, 0xB8]
                 bus.write_i2c_block_data(0x12, 0x00, [typeid, high_byte, low_byte])
-                
             else:  
                 print(3)
-                bus.write_i2c_block_data(0x12, 0x00, [typeid, value])
+                bus.write_i2c_block_data(0x12, 0x00, [typeid, high_byte, low_byte])
             time.sleep(0.05)
         if address == 2:
             value_bytes = list(value.to_bytes(4, 'little'))
