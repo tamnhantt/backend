@@ -258,9 +258,8 @@ def receive_data():
         if address == 1:
         # Gửi dữ liệu qua I2C
             if typeid == IN_WHEEL_SPD_ID:
-                packed = struct.pack('>H', value)
-                value_bytes = list(packed)
-            # bus.write_i2c_block_data(0x12, 0x00, [0, typeid, value])
+                packed = struct.pack('>I', value)  # '>I' = big-endian unsigned int (4 byte)
+                value_bytes = list(packed)        # [0x00, 0x00, 0x0B, 0xB8]
                 bus.write_i2c_block_data(0x12, 0x00, [0, typeid] + value_bytes)
                 print(value)
             else:  
