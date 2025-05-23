@@ -258,7 +258,7 @@ def receive_data():
         if address == 1:
             print(1)
         # Gửi dữ liệu qua I2C
-            if typeid == IN_WHEEL_SPD_ID:
+            if typeid == 100:
                 print(2)
                 # high_byte = (value >> 8) & 0xFF  # Lấy 8 bit cao = 0x0B = 11
                 low_byte  = value & 0xFF
