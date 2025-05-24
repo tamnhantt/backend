@@ -106,6 +106,7 @@ IN_xSG_TCS_LAMP_ID = 8;
 IN_CF_Gway_TurnSigRh_ID = 50;
 IN_CF_Gway_TurnSigLh_ID = 51;
 IN_SEATBELT_ID = 52;
+IN_ECMMILRequest = 55;
 
 #// ----------------------------------------------------------- from kia_picato_dbc
 
@@ -247,6 +248,7 @@ def receive_data():
             "kia_tcs_off" : IN_xSG_TCS_OFF_LAMP_ID,
             "kia_engine_temp" : IN_TEMP_ENG_ID,
             "ford_on" : Ford_on,
+            "ford_mil" : IN_ECMMILRequest ;
         }
         if not field or value is None or addr is None:
             return jsonify({"error": "Thiếu 'field', 'value', hoặc 'addr'"}), 400
