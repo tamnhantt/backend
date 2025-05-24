@@ -248,7 +248,7 @@ def receive_data():
             "kia_tcs_off" : IN_xSG_TCS_OFF_LAMP_ID,
             "kia_engine_temp" : IN_TEMP_ENG_ID,
             "ford_on" : Ford_on,
-            "ford_mil" : IN_ECMMILRequest ;
+            "ford_mil" : IN_ECMMILRequest,
         }
         if not field or value is None or addr is None:
             return jsonify({"error": "Thiếu 'field', 'value', hoặc 'addr'"}), 400
