@@ -105,8 +105,16 @@ IN_xSG_TCS_LAMP_ID = 8;
 #----------------------------------------------------------- from open dpc - lights
 IN_CF_Gway_TurnSigRh_ID = 50;
 IN_CF_Gway_TurnSigLh_ID = 51;
-IN_SEATBELT_ID = 52;
+IN_Ford_TPMS = 53; 
+Brake_Lamp = 54; 
 IN_ECMMILRequest = 55;
+TCS_OFF_Lamp = 56;
+TCS_Lamp = 57;
+ABS_Lamp = 58;
+Ford_on = 59;
+Air_Bag = 60;
+high_beam = 61;
+IN_SEATBELT_ID = 52;
 
 #// ----------------------------------------------------------- from kia_picato_dbc
 
@@ -249,6 +257,12 @@ def receive_data():
             "kia_engine_temp" : IN_TEMP_ENG_ID,
             "ford_on" : Ford_on,
             "ford_mil" : IN_ECMMILRequest,
+            "ford_tpms" : IN_Ford_TPMS,
+            "ford_tcs_off": TCS_OFF_Lamp,
+            "ford_tcs" : TCS_Lamp,
+            "ford_abs" : ABS_Lamp,
+            "ford_srs" : Air_Bag,
+            "ford_beamlight" : high_beam,
         }
         if not field or value is None or addr is None:
             return jsonify({"error": "Thiếu 'field', 'value', hoặc 'addr'"}), 400
