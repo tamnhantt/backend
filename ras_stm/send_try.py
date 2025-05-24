@@ -264,7 +264,7 @@ def receive_data():
             value_bytes = list(value.to_bytes(4, 'little'))
             datasend = [165, 192, typeid, 5] + value_bytes + bit_5_to_8
             bus.write_i2c_block_data(0x20, 0x00, datasend)
-            time.sleep(2)
+            # time.sleep()
         return jsonify({
             "status": "ok",
             "sent": {"addr": address, "typeid": typeid, "value": value}
