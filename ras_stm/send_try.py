@@ -112,7 +112,7 @@ IN_SEATBELT_ID = 52;
 IN_SPEED_MOTOR_ID = 100;
 IN_TEMP_ENG_ID = 101;
 IN_WHEEL_SPD_ID = 102;
-
+Ford_on = 59;
 
 # ------------------------------------------------------
 
@@ -246,6 +246,7 @@ def receive_data():
             "kia_tcs" : IN_xSG_TCS_LAMP_ID,
             "kia_tcs_off" : IN_xSG_TCS_OFF_LAMP_ID,
             "kia_engine_temp" : IN_TEMP_ENG_ID,
+            "ford_on" : Ford_on,
         }
         if not field or value is None or addr is None:
             return jsonify({"error": "Thiếu 'field', 'value', hoặc 'addr'"}), 400
