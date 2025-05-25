@@ -263,6 +263,7 @@ def receive_data():
             "ford_abs" : ABS_Lamp,
             "ford_srs" : Air_Bag,
             "ford_beamlight" : high_beam,
+            "ford_brake" : Brake_Lamp,
         }
         if not field or value is None or addr is None:
             return jsonify({"error": "Thiếu 'field', 'value', hoặc 'addr'"}), 400
